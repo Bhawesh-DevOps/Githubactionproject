@@ -15,8 +15,8 @@ resource "azurerm_resource_group" "myrg1" {
   }
 resource "azurerm_storage_account" "stg1" {
     name = "stgq"
-    location = "eastus"
-    resource_group_name = azurerm_resource_group.myrg1
+    resource_group_name = azurerm_resource_group.myrg1.name
+    location = azurerm_resource_group.myrg1.location
     account_replication_type = "LRS"
     account_tier = "Standard"
     }
