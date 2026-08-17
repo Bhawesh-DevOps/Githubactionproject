@@ -1,33 +1,36 @@
 name: CI
+
 on:
   push:
     branches:
-    - main
-    
+      - main
+
   workflow_dispatch:
+
 jobs:
   terraform:
-    runs-on: ubuntu-22.04 
+    runs-on: ubuntu-22.04
+
     steps:
-    - uses: hashicorp/setup-terraform@v4
-      with:
-        terraform_version: "1.14.6"
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Terraform Init
-      run: terraform init
-    - name: Terraform Format
-      run: terraform fmt -check  
-    - name: terraform-validate  
-      run: terraform validate
-    - name: terraform-plan  
-      run: terraform plan
-    - name: Terraform Apply
-      run: terraform apply -auto-approve  
-      
-      
-      
-    
-  
-  
-    
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.14.6"
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
